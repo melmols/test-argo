@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-labs-nginx-deployment
+  labels:
+    app: k8s-labs-nginx
+    environment: development
+    company: kubernetes-laboratories
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: k8s-labs-nginx
+  template:
+    metadata:
+      labels:
+        app: k8s-labs-nginx
+        environment: development
+        company: kubernetes-laboratories
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: COMPANY_NAME
+          value: "Kubernetes Laboratories"
